@@ -42,8 +42,8 @@ int convert_mem_to_inst(int num_of_lines_read_from_memory)
 		_instructions[i] = malloc(sizeof(inst));
 		_instructions[i]->trace = malloc(sizeof(inst_trace));
 		_instructions[i]->opcode = (_memory_image_input[i] & inst_params_opcode) >> inst_params_opcode_shift;
-
-		_instructions[i]->imm = _memory_image_input[i] & inst_params_imm;
+		short imm = _memory_image_input[i] & inst_params_imm;
+		_instructions[i]->imm = (int)imm;
 		_instructions[i]->src1_index = (_memory_image_input[i] & inst_params_src1) >> inst_params_src1_shift;
 		_instructions[i]->src0_index = (_memory_image_input[i] & inst_params_src0) >> inst_params_src0_shift;
 		_instructions[i]->dst_index = (_memory_image_input[i] & inst_params_dst) >> inst_params_dst_shift;
