@@ -1,7 +1,6 @@
 #pragma once
 #define _CRT_SECURE_NO_WARNINGS
 
-#include "Utils.h"
 
 /*
 This function parses the memory file.

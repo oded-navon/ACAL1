@@ -279,6 +279,8 @@ int print_line5(FILE* file, inst* inst_cmd)
 			_pc
 		);
 		break;
+	default:
+		break;
 	}
 
 	if (check_ret < 0)

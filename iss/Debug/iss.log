@@ -1,3 +1,6 @@
 ﻿  Main.c
+  Globals.c
+  ArgParser.c
+  Generating Code...
   iss.vcxproj -> C:\Users\Oded_navon\Documents\Visual Studio 2015\Projects\iss\Debug\iss.exe
   iss.vcxproj -> C:\Users\Oded_navon\Documents\Visual Studio 2015\Projects\iss\Debug\iss.pdb (Partial PDB)

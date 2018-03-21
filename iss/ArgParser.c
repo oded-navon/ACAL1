@@ -1,4 +1,5 @@
 #include "ArgParser.h"
+#include "Utils.h"
 
 int parse_hex_number(char* hex_number);
 

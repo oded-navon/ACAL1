@@ -2,7 +2,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <tchar.h>
 #include <stdbool.h>
 
 #define MEMORY_IMAGE_MAX_SIZE (65536)
@@ -73,4 +72,4 @@ inst* _instructions[MEMORY_IMAGE_MAX_SIZE];
 int _regs[NUM_OF_REGS];
 int _pc;
 char* trace_file;
-char opcodes_str[25][5];
+char opcodes_str[32][5];

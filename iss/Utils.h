@@ -3,8 +3,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <tchar.h>
 #include <stdbool.h>
+#include <string.h>
 #include "Globals.c"
 
 #define MEMORY_IMAGE_MAX_SIZE (65536)

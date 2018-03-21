@@ -35,7 +35,10 @@ void run_cmd(inst* inst_cmd)
 		{
 			temp1 = _regs[inst_cmd->src1_index];
 		}
-		_regs[inst_cmd->dst_index] = temp0 + temp1;
+		if (inst_cmd->dst_index > 1)
+		{
+			_regs[inst_cmd->dst_index] = temp0 + temp1;
+		}
 		_pc++;
 		break;
 
@@ -56,7 +59,10 @@ void run_cmd(inst* inst_cmd)
 		{
 			temp1 = _regs[inst_cmd->src1_index];
 		}
-		_regs[inst_cmd->dst_index] = temp0 - temp1;
+		if (inst_cmd->dst_index > 1)
+		{
+			_regs[inst_cmd->dst_index] = temp0 - temp1;
+		}
 		_pc++;
 		break;
 
@@ -77,7 +83,10 @@ void run_cmd(inst* inst_cmd)
 		{
 			temp1 = _regs[inst_cmd->src1_index];
 		}
-		_regs[inst_cmd->dst_index] = temp0 << temp1;
+		if (inst_cmd->dst_index > 1)
+		{
+			_regs[inst_cmd->dst_index] = temp0 << temp1;
+		}
 		_pc++;
 		break;
 
@@ -98,7 +107,10 @@ void run_cmd(inst* inst_cmd)
 		{
 			temp1 = _regs[inst_cmd->src1_index];
 		}
-		_regs[inst_cmd->dst_index] = temp0 >> temp1;
+		if (inst_cmd->dst_index > 1)
+		{
+			_regs[inst_cmd->dst_index] = temp0 >> temp1;
+		}
 		_pc++;
 		break;
 
@@ -119,7 +131,10 @@ void run_cmd(inst* inst_cmd)
 		{
 			temp1 = _regs[inst_cmd->src1_index];
 		}
-		_regs[inst_cmd->dst_index] = temp0 & temp1;
+		if (inst_cmd->dst_index > 1)
+		{
+			_regs[inst_cmd->dst_index] = temp0 & temp1;
+		}
 		_pc++;
 		break;
 
@@ -140,7 +155,10 @@ void run_cmd(inst* inst_cmd)
 		{
 			temp1 = _regs[inst_cmd->src1_index];
 		}
-		_regs[inst_cmd->dst_index] = temp0 | temp1;
+		if (inst_cmd->dst_index > 1)
+		{
+			_regs[inst_cmd->dst_index] = temp0 | temp1;
+		}
 		_pc++;
 		break;
 
@@ -161,7 +179,10 @@ void run_cmd(inst* inst_cmd)
 		{
 			temp1 = _regs[inst_cmd->src1_index];
 		}
-		_regs[inst_cmd->dst_index] = temp0 ^ temp1;
+		if (inst_cmd->dst_index > 1)
+		{
+			_regs[inst_cmd->dst_index] = temp0 ^ temp1;
+		}
 		_pc++;
 		break;
 
@@ -169,7 +190,10 @@ void run_cmd(inst* inst_cmd)
 		temp0 = (inst_cmd->imm) << 16;
 		// we need to only load the imm into the high bits of dst 
 		// and not override the lower bits of dst, so we use AND
-		_regs[inst_cmd->dst_index] = _regs[inst_cmd->dst_index] & temp0;
+		if (inst_cmd->dst_index > 1)
+		{
+			_regs[inst_cmd->dst_index] = _regs[inst_cmd->dst_index] & temp0;
+		}
 		_pc++;
 		break;
 
@@ -185,7 +209,13 @@ void run_cmd(inst* inst_cmd)
 			temp1 = _regs[inst_cmd->src1_index];
 			temp0 = _memory_image_input[temp1];
 		}
-		_regs[inst_cmd->dst_index] = temp0;
+		if (temp1 < MEMORY_IMAGE_MAX_SIZE)
+		{
+			if (inst_cmd->dst_index > 1)
+			{
+				_regs[inst_cmd->dst_index] = temp0;
+			}
+		}
 		_pc++;
 		break;
 
@@ -208,7 +238,10 @@ void run_cmd(inst* inst_cmd)
 		{
 			temp1 = _regs[inst_cmd->src1_index];
 		}
-		_memory_image_input[temp1] = temp0;
+		if (temp1 < MEMORY_IMAGE_MAX_SIZE)
+		{
+			_memory_image_input[temp1] = temp0;
+		}
 		_pc++;
 		break;
 
@@ -346,10 +379,21 @@ void run_cmd(inst* inst_cmd)
 		{
 			temp0 = _regs[inst_cmd->src0_index];
 		}
-		_pc = temp0;
+		_regs[7] = _pc;
+		if (temp0 < MEMORY_IMAGE_MAX_SIZE)
+		{
+			_pc = temp0;
+		}
+		else
+		{
+			_pc++;
+		}
 		break;
 
 	case HLT:
+		break;
+	default:
+		_pc++;
 		break;
 	}
 	inst_cmd->trace->pc_taken = _pc;
